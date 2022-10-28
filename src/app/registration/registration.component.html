@@ -1,0 +1,72 @@
+<div class="containter">
+  <form [formGroup]="formValue">
+   <label for="fname">First Name</label>&nbsp;
+   <input type="text" formControlName = "firstname" id="fname" class="form-control" >
+   <div *ngIf="formValue.get('firstname')?.touched  && formValue.get('firstname')?.hasError('required')">First Name is Required</div>
+
+   <br><br>
+   <label  for="lname">Last Name</label>&nbsp;
+   <input type="text" formControlName="lastname" id="lname" class="form-control" >
+   <div *ngIf="formValue.get('lastname')?.touched  && formValue.get('lastname')?.hasError('required')">Last Name is Required</div><br><br>
+   <label  for="email">Email</label>&nbsp;
+   <input type="text" formControlName="email" id="email" class="form-control" >
+   <div *ngIf="formValue.get('email')?.touched  && formValue.get('email')?.hasError('required')">Email is Required</div>
+   <div *ngIf="formValue.get('email')?.touched  && formValue.get('email')?.hasError('email')">Email is Not Valid</div>
+   <br><br>
+   <label  for="phone">Phone</label>&nbsp;
+   <input type="number" formControlName="phone" id="phone" class="form-control" >
+   <div *ngIf="formValue.get('phone')?.touched  && formValue.get('phone')?.hasError('required')">Phone Number is Required</div><br><br>
+   <label  for="company">Company</label>&nbsp;
+   <input type="text" formControlName="company" id="company" class="form-control" >
+   <div *ngIf="formValue.get('comapany')?.touched  && formValue.get('company')?.hasError('required')">Company is Required</div><br><br>
+   <label>Gender</label>&nbsp;<br>
+   <input type="radio" formControlName="gender" id="male" value="M"  class="form-control" ><label for="male">Male</label><br>
+   <input type="radio" formControlName="gender" id="female"  value="F"  class="form-control" ><label for="female">Female</label><br><br>
+   <label for="dob">DOB</label>&nbsp;
+   <input type="date" formControlName="dob" id="dob">
+   <div *ngIf="formValue.get('dob')?.touched  && formValue.get('dob')?.hasError('required')">DOB is Required</div><br><br>
+   <label for="password">Password</label>&nbsp;
+   <input type="password" formControlName="password" id="password">
+   <div *ngIf="formValue.get('password')?.touched  && formValue.get('password')?.hasError('required')">Password  is Required</div><br><br>
+   <label for="cpassword">Confirm Password</label>&nbsp;
+   <input type="password" formControlName="cpassword" id="cpassword">
+   <div *ngIf="formValue.get('cpassword')?.touched  && formValue.get('cpassword')?.hasError('required')">Confir Password is Required</div><br><br>
+   <button *ngIf="regiAccess"  (click)="postRegistrationDetails()">Register</button>
+   <button *ngIf="editAccess" (click)="updateRegDetails()">Update</button>
+   <button (click)="cancelRegiDetails()">Cancel</button>
+
+  </form>
+
+ </div>
+
+
+ <table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Company</th>
+      <th>Gender</th>
+      <th>DOB</th>
+      <th>Edit</th>
+      <th>Delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of regDetails" >
+      <td>{{row.firstname}}</td>
+      <td>{{row.lastname}}</td>
+      <td>{{row.email}}</td>
+      <td>{{row.phone}}</td>
+      <td>{{row.company}}</td>
+      <td>{{row.gender}}</td>
+      <td>{{row.dob}}</td>
+      <td><button (click)="editRegDetails(row)">Edit</button></td>
+      <td><button (click)="deleteRegistrationDetails(row)">Delete</button></td>
+    </tr>
+
+  </tbody>
+ </table>
